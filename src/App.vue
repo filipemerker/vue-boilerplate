@@ -6,6 +6,7 @@
           <img class="logo" src="./assets/logo.png">
         </router-link>
         <router-link to="/about">about</router-link>
+        <router-link to="/blog">blog</router-link>
         <a class="github" href="https://github.com/filipemerker" target="_blank">
           by filipe merker
         </a>

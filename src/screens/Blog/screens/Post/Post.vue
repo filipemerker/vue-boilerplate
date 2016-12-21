@@ -1,18 +1,36 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>{{ description }}</p>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.body }}</p>
   </div>
 </template>
 
 <script>
+function fetchPost (store) {
+  return store.dispatch('FETCH_ITEM', {
+    section: 'test',
+    type: 'post',
+    id: store.state.route.params.id
+  })
+}
+
 export default {
   name: 'about',
   data () {
     return {
-      msg: 'This is the about page',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, quibusdam. Praesentium dolorem ea aperiam voluptas officiis, minus eos voluptate eligendi unde assumenda delectus laudantium nisi, debitis consequuntur, ullam id ex!'
+      loading: true
     }
+  },
+  computed: {
+    post () {
+      return this.$store.state.items['post']
+    }
+  },
+  beforeMount () {
+    this.$store.state.items['post'] = {}
+    fetchPost(this.$store).then(() => {
+      this.loading = false
+    })
   }
 }
 </script>
